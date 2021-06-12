@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="author" content="2021 Semester project">
+<title>Cloud Computing and Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Cloud Computing and Services</h1>
+<div class="details">
+<span id="author" class="author">2021 Semester project</span><br>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Info</div>
+<div class="paragraph">
+<p>This project was developed as part of the 2021 semester Cloud Computing and Services lab.<br>
+Collaborators:<br>
+ΝΙΚΟΛΑΟΣ ΧΡΟΝΟΠΟΥΛΟΣ ΑΜ:131094,<br>
+ΚΑΒΑΛΙΕΡΟΥ ΘΑΛΕΙΑ-ΕΛΠΙΣ ΑΜ:171009</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_description">1. Project description</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Data Collector Service</div>
+<div class="paragraph">
+<p>The project <strong><em>Data Collector Service</em></strong> is the default project of this semester&#8217;s lab class. We aimed at creating a swarm of microservices that serve the purposes of <em>data collection</em> and <em>presentation</em>. The project was accomplished with the help of the Swarmlab hybrid and venus.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tools_services">2. Tools / services</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Besides the <a href="http://docs.swarmlab.io/">Swarmlab</a> lab service, the following tools were used.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.ansible.com/">ansible</a></p>
+</li>
+<li>
+<p><a href="https://www.fluentd.org/">fluentd</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.org/en/">node.js</a></p>
+</li>
+<li>
+<p><a href="https://www.mongodb.com/">mongoDB</a></p>
+</li>
+<li>
+<p><a href="https://www.mongodb.com/">Vue.js</a></p>
+</li>
+<li>
+<p><a href="https://socket.io/">socket.IO</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To install every prerequisite included in <em>package.json</em>, run<br></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>npm install</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_project">3. The project</h3>
+<div class="sect3">
+<h4 id="_first_part_deploying_the_network">3.1. First part : Deploying the network</h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>For this part, we used the <em>linux</em> lab room of the <em>swarmlab</em> service. By uploading a number of containers, we create a swarm of machines. These machines can collect data of any type, but for the testing purposes of this project they will collect data from <em>/tmp/log-in</em> directory. The automated data collection is achieved with the tool <em>fluentd</em>. With <em>ansible</em>, we managed to orchestrate the swarm machines in order to act the same way.</p>
+</div>
+<div class="paragraph">
+<p>From the Manager machine of the swarm, follow the steps:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>./fluentd.yml.sh<br>
+With this script, the system will be updated and ansible will be downloaded in the Manager machine. Then, the ansible playbook <em>fluentd.yml</em> will run so that the required settings will be installed on every other machine of the swarm.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>./fluentd-config-update.yml.sh<br>
+Run this script to set fluentd on every machine. The tool will collect data of the directory <em>/tmp/log-in</em>, where every machine of the swarm stores the intended data.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_second_part_storing_data_in_a_database">3.2. Second part: Storing data in a database</h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Although, storing data in files is enought for testing the tool, for the needs of our, total, project we connected the swarm with a <em>mongoDB</em> replica. The databases was uploaded in the lab network via the <em>swarmlab</em> service and it works as the following image indicates.<br>
+<span class="image"><img src="images/mongo_replica.png" alt="mongoDB replica"></span></p>
+</div>
+<div class="paragraph">
+<p>In the <em>mongoDB</em> replica network, we find 3 machines running a <em>mongoDB</em> service. The Primary is the first tasked with storing data, incomming from the Data Collector service, and presenting them back. If Primary is not available, one of the other two will carry through the jobs needed.</p>
+</div>
+<div class="paragraph">
+<p>From the Primary, or any other machine, of the <em>mongoDB</em> replica network, follo the steps:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>mongo<br>
+After connecting with the machine, run this command to enter the database&#8217;s interface.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>use app_swarmlab<br>
+Use this database, where data from the swarm will be stored in a collection.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>db.auth('app_swarmlab','app_swarmlab')<br>
+Connect as admin to the database.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>db.logs.find({})<br>
+View logs.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2021-06-11 20:47:01 +0300
+</div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>
