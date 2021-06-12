@@ -1,6 +1,6 @@
 all: one two
 
 one:
-        ./fluentd.yml.sh
+	./fluentd.yml.sh
 two:
-        ./fluentd-config-update.yml.sh
+	./fluentd-config-update.yml.sh
