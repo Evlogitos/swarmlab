@@ -67,3 +67,4 @@ Connect as admin to the database.
 <4> db.logs.find({}).sort({_id:-1}) +
 View logs in a descending order.
 ****
+
