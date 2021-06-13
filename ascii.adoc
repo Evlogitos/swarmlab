@@ -38,11 +38,15 @@ npm install
 ****
 For this part, we used the _linux_ lab room of the _swarmlab_ service. By uploading a number of containers, we create a swarm of machines. These machines can collect data of any type, but for the testing purposes of this project they will collect data from _/tmp/log-in_ directory. The automated data collection is achieved with the tool _fluentd_. With _ansible_, we managed to orchestrate the swarm machines in order to act the same way.
 [%hardbreaks]
-From the Manager machine of the swarm, follow the steps:
+From the Manager machine of the swarm, run (in the fluentd directory): 
+....
+make all
+....
+This will run the following files:
 [%hardbreaks]
-<1> ./fluentd.yml.sh +
+<1> fluentd.yml.sh +
 With this script, the system will be updated and ansible will be downloaded in the Manager machine. Then, the ansible playbook _fluentd.yml_ will run so that the required settings will be installed on every other machine of the swarm.
-<2> ./fluentd-config-update.yml.sh +
+<2> fluentd-config-update.yml.sh +
 Run this script to set fluentd on every machine. The tool will collect data of the directory _/tmp/log-in_, where every machine of the swarm stores the intended data.
 ****
 ==== Second part: Storing data in a database
@@ -60,7 +64,7 @@ After connecting with the machine, run this command to enter the database's inte
 Use this database, where data from the swarm will be stored in a collection.
 <3> db.auth('app_swarmlab','app_swarmlab') +
 Connect as admin to the database.
-<4> db.logs.find({}) +
-View logs.
+<4> db.logs.find({}).sort({_id:-1}) +
+View logs in a descending order.
 ****
 
