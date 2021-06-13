@@ -94,18 +94,26 @@ Collaborators:<br>
 <p>For this part, we used the <em>linux</em> lab room of the <em>swarmlab</em> service. By uploading a number of containers, we create a swarm of machines. These machines can collect data of any type, but for the testing purposes of this project they will collect data from <em>/tmp/log-in</em> directory. The automated data collection is achieved with the tool <em>fluentd</em>. With <em>ansible</em>, we managed to orchestrate the swarm machines in order to act the same way.</p>
 </div>
 <div class="paragraph">
-<p>From the Manager machine of the swarm, follow the steps:</p>
+<p>From the Manager machine of the swarm, run (in the fluentd directory):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make all</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will run the following files:</p>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>./fluentd.yml.sh<br>
+<td>fluentd.yml.sh<br>
 With this script, the system will be updated and ansible will be downloaded in the Manager machine. Then, the ansible playbook <em>fluentd.yml</em> will run so that the required settings will be installed on every other machine of the swarm.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>./fluentd-config-update.yml.sh<br>
+<td>fluentd-config-update.yml.sh<br>
 Run this script to set fluentd on every machine. The tool will collect data of the directory <em>/tmp/log-in</em>, where every machine of the swarm stores the intended data.</td>
 </tr>
 </table>
@@ -146,8 +154,8 @@ Connect as admin to the database.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>db.logs.find({})<br>
-View logs.</td>
+<td>db.logs.find({}).sort({_id:-1})<br>
+View logs in a descending order.</td>
 </tr>
 </table>
 </div>
@@ -158,7 +166,7 @@ View logs.</td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-06-11 20:47:01 +0300
+Last updated 2021-06-12 20:10:54 +0300
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
