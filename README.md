@@ -19,7 +19,7 @@ The project was developed with the help of the following tools ands services:
  > we deployed a mongoDB replica network for storing the data.
  
 ## Instructions
- > Instructions for project's deployment and usage are presented via the [ascii.adoc.html](ascii.adoc.html). Open
+ > Instructions for project's deployment and usage are presented via the [ascii.adoc](ascii.adoc.html). Open
  > this with the help of a browser.
 
 ### Info
