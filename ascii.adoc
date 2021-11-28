@@ -42,7 +42,7 @@ From the Manager machine of the swarm, run (in the fluentd directory):
 ....
 make all
 ....
-This will run the following files:
+This will run the following scripts:
 [%hardbreaks]
 <1> fluentd.yml.sh +
 With this script, the system will be updated and ansible will be downloaded in the Manager machine. Then, the ansible playbook _fluentd.yml_ will run so that the required settings will be installed on every other machine of the swarm.
