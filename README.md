@@ -27,6 +27,7 @@ The project was developed with the help of the following tools ands services:
  Class: Cloud Computing and Services</br>
  Collaborators: ΝΙΚΟΛΑΟΣ ΧΡΟΝΟΠΟΥΛΟΣ ΑΜ:131094, ΚΑΒΑΛΙΕΡΟΥ ΘΑΛΕΙΑ-ΕΛΠΙΣ ΑΜ:171009</br>
  Semester: Spring 2021</br></br>
+ Grade: 10/10
  
  University of West Attica</br>
  Department of Informatics and Computer Engineering
